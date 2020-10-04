@@ -1,57 +1,95 @@
 ﻿using UnityEngine;
-
 public class UseWeapon : MonoBehaviour
 {
 	public enum Elements { FIRE = 1, ICE = -1, NONE = 0 };
 
-
 	private FlameThrower _flameThrower;
 	private IceGun _iceGun;
 	private Cannon _cannon;
-	private Elements weaponElement;
 	private GameObject _bullet;
+	private float _rapidFireTimer = .2f;
+	private float _time = 0;
+	private int _weaponAmount = 3;
+	private int _weaponSelected = 1;
+	private int _selectCannon = 1;
+	private int _selectFlameThrower = 2;
+	private int _selectIceGun = 3;
+	private bool _canFire = false;
+	private Elements weaponElement;
+
 	private void Awake()
 	{
-		if (GetComponent<FlameThrower>() != null)
-		{
-			Debug.Log("Use weapon: FlameThrower compnent");
-			_flameThrower = GetComponent<FlameThrower>();
-			weaponElement = _flameThrower.WeaponElement();
-		}
-		if (GetComponent<IceGun>() != null)
-		{
-			Debug.Log("Use weapon: IceGun compnent");
-			_iceGun = GetComponent<IceGun>();
-			weaponElement = _iceGun.WeaponElement();
-		}
-		if (GetComponent<Cannon>() != null)
-		{
-			Debug.Log("Use weapon: Cannon compnent");
-			_cannon = GetComponent<Cannon>();
-			weaponElement = _cannon.WeaponElement();
-		}
-
-
+		_cannon = GetComponent<Cannon>();
+		weaponElement = _cannon.WeaponElement();
+		_flameThrower = GetComponent<FlameThrower>();
+		weaponElement = _flameThrower.WeaponElement();
+		_iceGun = GetComponent<IceGun>();
+		weaponElement = _iceGun.WeaponElement();
+		_cannon.enabled = false;
+		_flameThrower.enabled = false;
+		_iceGun.enabled = false;
 	}
 	public void Attack(KeyCode fireKey)
 	{
-		if (Input.GetKey(fireKey))
+		if (_canFire)
 		{
-			if (GetComponent<FlameThrower>() != null)
+			if (_weaponSelected == _selectFlameThrower)
 			{
-				_flameThrower = GetComponent<FlameThrower>();
-				_flameThrower.Attack();
+				_flameThrower.enabled = true;
+				_iceGun.enabled = false;
+				_cannon.enabled = false;
+				_flameThrower.CanFire(weaponElement);
 			}
-			if (GetComponent<IceGun>() != null)
+			if (_weaponSelected == _selectIceGun)
 			{
+				_flameThrower.enabled = false;
+				_iceGun.enabled = true;
+				_cannon.enabled = false;
 				_iceGun = GetComponent<IceGun>();
-				_iceGun.Attack();
+				_iceGun.CanFire(weaponElement);
 			}
-			if (GetComponent<Cannon>() != null)
+			if (_weaponSelected == _selectCannon)
 			{
+				_flameThrower.enabled = false;
+				_iceGun.enabled = false;
+				_cannon.enabled = true;
 				_cannon = GetComponent<Cannon>();
-				_cannon.Attack();
+				_cannon.CanFire(weaponElement);
 			}
 		}
+		_canFire = false;
+	}
+	private void Update()
+	{
+		if (!_canFire)
+		{
+			if (_time < _rapidFireTimer)
+			{
+				_time += Time.deltaTime;
+			}
+			else if (_time >= _rapidFireTimer)
+			{
+				_canFire = true;
+				_time = 0;
+			}
+		}
+	}
+	public int PreviousWeapon()
+	{
+		_weaponSelected--;
+		if (_weaponSelected == 0)
+		{
+			_weaponSelected = _weaponAmount;
+		}
+		return _weaponSelected;
+	}
+	public int NextWeapon()
+	{
+		_weaponSelected++;
+		if (_weaponSelected > _weaponAmount)
+		{
+			_weaponSelected = 1;
+		}
+		return _weaponSelected;
 	}
 }

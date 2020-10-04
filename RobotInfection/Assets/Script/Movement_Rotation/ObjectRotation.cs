@@ -3,14 +3,12 @@ public class ObjectRotation : MonoBehaviour
 {
 	private Camera _camera;
 	private Transform _selfTransformPosition;
-
 	private Vector3 _selfPosition;
-
 	private float _x;
 	private float _y;
+	private float _angle;
 	private float _targetAboveSelf = 90f;
 	private float _targetBelowSelf = 270f;
-	private float _angle;
 
 	private void Awake()
 	{
@@ -20,7 +18,6 @@ public class ObjectRotation : MonoBehaviour
 	}
 	private void RotateBody()
 	{
-
 		if (_x != 0)
 		{
 			_angle = _y / _x;
@@ -66,9 +63,5 @@ public class ObjectRotation : MonoBehaviour
 		_y = coordinates.y - _selfPosition.y;
 		RotateBody();
 		return coordinates;
-	}
-	public float Angle()
-	{
-		return _angle;
 	}
 }

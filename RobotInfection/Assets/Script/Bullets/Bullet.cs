@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 	private float _movemntX;
 	private float _movemntY;
 	private float _deltaTime;
-	private float _lifeTime = 10f;
+	private float _lifeTime = 2.5f;
 	private float _timer;
 
 	private void Awake()
@@ -50,6 +50,10 @@ public class Bullet : MonoBehaviour
 		{
 			_objectMovement = GetComponent<ObjectMovement>();
 		}
+	}
+	public Elements BulletElement()
+	{
+		return bulletElement;
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
