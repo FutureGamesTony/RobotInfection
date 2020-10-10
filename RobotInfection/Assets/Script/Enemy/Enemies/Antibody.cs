@@ -19,9 +19,6 @@ public class Antibody : MonoBehaviour
 	private float _effectTimeLimit = 3f;
 	private float _effectTimer = 0.0f;
 	private float _spriteSize = .5f;
-	private float _sineMovement;
-	private int _sineUpdate;
-	private int _sineIntervallTime = 5; 
 	private int _hp;
 	private int _hitElement = 0;
 	private Vector3 _playerPosition;
@@ -67,19 +64,19 @@ public class Antibody : MonoBehaviour
 		_playerPosition = _player.transform.position;
 		if (_playerPosition.x - transform.position.x < 0)
 		{
-			_movementX = -0.1f * SinusCurve();
+			_movementX = -0.1f;
 		}
 		if (_playerPosition.x - transform.position.x > 0)
 		{
-			_movementX = 0.1f * SinusCurve();
+			_movementX = 0.1f;
 		}
 		if (_playerPosition.y - transform.position.y < 0)
 		{
-			_movementY = -0.1f * SinusCurve();
+			_movementY = -0.1f;
 		}
 		if (_playerPosition.y - transform.position.y > 0)
 		{
-			_movementY = 0.1f * SinusCurve();
+			_movementY = 0.1f;
 		}
 
 		_objectRotation.FollowGameObject(_player);
@@ -117,17 +114,7 @@ public class Antibody : MonoBehaviour
 		_objectRotation.FollowGameObject(_player);
 		_objectMovement.Movement(_movementX, _movementY, _deltaTime, _movementSpeed);
 	}
-	private float SinusCurve()
-	{
-		_sineMovement += Time.deltaTime;
-		_sineUpdate = (int)_sineMovement;
-		if (_sineUpdate % _sineIntervallTime == 0)
-		{
-			_sineMovement = Mathf.Sin(_sineMovement);
 
-		}
-		return _sineMovement;
-	}
 	private IEnumerator ElementEffect()
 	{
 		yield return new WaitForSeconds(_effectTimeLimit);
