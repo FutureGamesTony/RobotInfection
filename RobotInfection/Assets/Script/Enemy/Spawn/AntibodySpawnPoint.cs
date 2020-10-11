@@ -6,10 +6,8 @@ public class AntibodySpawnPoint : MonoBehaviour
 	public float spawnSecond = 3f;
 	private Antibody _antibody;
 	private GameObject _antibodyGameObject;
-	Vector3 temp;
 	private void Awake()
 	{
-		temp = transform.position;
 		_antibodyGameObject = Resources.Load<GameObject>("Prefabs/Antibody");
 	}
 	void Update()

@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
 	public int hp = 10;
 	private bool _isShielded;
+	private GameObject[] _pickUps;
 	private void Update()
 	{
 		if (hp < 0)
@@ -29,6 +30,11 @@ public class Player : MonoBehaviour
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (collision.gameObject.tag == "PickUp")
+		{
+			_pickUps = GameObject.FindGameObjectsWithTag("PickUo"); 
+				//collision.gameObject.GetComponent<PickUp>().pickUpObject;
+		}
 		if (_isShielded)
 		{
 
