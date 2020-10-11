@@ -520,12 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19e043475bba0a4d82a28e702d79dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1715215689}
-  _sineCurveDistance: 5
-  _deltaTime: 0
-  _movement: {x: 0, y: 0}
-  _position: {x: 0, y: 0}
-  _movementSpeed: 4.71
 --- !u!212 &692639087
 SpriteRenderer:
   m_ObjectHideFlags: 0
