@@ -2,9 +2,15 @@
 
 public class Player : MonoBehaviour
 {
+	private enum PickUpTypes { ICEGUN, FLAMETHROWER, CANNON, HEALTH, SHIELD };
 	public int hp = 10;
 	private bool _isShielded;
 	private GameObject[] _pickUps;
+	private UseWeapon _useWeapon;
+	private void Awake()
+	{
+		_useWeapon = GetComponent<UseWeapon>();
+	}
 	private void Update()
 	{
 		if (hp < 0)
@@ -32,8 +38,32 @@ public class Player : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "PickUp")
 		{
-			_pickUps = GameObject.FindGameObjectsWithTag("PickUo"); 
-				//collision.gameObject.GetComponent<PickUp>().pickUpObject;
+			if (collision.gameObject.GetComponent<PickUp>().PickUpType() == (int)PickUpTypes.ICEGUN) //Not the best solution...
+			{
+				gameObject.AddComponent<IceGun>();
+				_useWeapon.AddIceGun();
+				_useWeapon.WeaponAmount();
+			}
+			if ((int)collision.gameObject.GetComponent<PickUp>().PickUpType() == (int)PickUpTypes.FLAMETHROWER)
+			{
+				gameObject.AddComponent<FlameThrower>();
+				_useWeapon.AddFlamethrower();
+				_useWeapon.WeaponAmount();
+			}
+			if ((int)collision.gameObject.GetComponent<PickUp>().PickUpType() == (int)PickUpTypes.CANNON)
+			{
+				gameObject.AddComponent<Cannon>();
+				_useWeapon.AddCannon();
+				_useWeapon.WeaponAmount();
+			}
+			if ((int)collision.gameObject.GetComponent<PickUp>().PickUpType() == (int)PickUpTypes.HEALTH)
+			{
+				hp += collision.gameObject.GetComponent<PickUp>().PickUpHealth();
+			}
+			if ((int)collision.gameObject.GetComponent<PickUp>().PickUpType() == (int)PickUpTypes.SHIELD)
+			{
+				//More time and the shield function was going to be here, with a counter for uses and the ability to pick it up again
+			}			
 		}
 		if (_isShielded)
 		{

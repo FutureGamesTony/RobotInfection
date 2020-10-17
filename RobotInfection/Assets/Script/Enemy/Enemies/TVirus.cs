@@ -109,4 +109,11 @@ public class TVirus : MonoBehaviour
 		_x = _playerPosition.x - transform.position.x;
 		_y = _playerPosition.y - transform.position.y;
 	}
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.tag == "Bullet")
+		{
+			Destroy(gameObject);
+		}
+	}
 }

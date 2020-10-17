@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5397217741275920181}
   - component: {fileID: 5397217741275920180}
   - component: {fileID: 5397217741275920179}
+  - component: {fileID: 1094956993}
   m_Layer: 0
   m_Name: TVirus
   m_TagString: Untagged
@@ -143,3 +144,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9b39d5c0b464b4b88d2ee25afeef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &1094956993
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5397217741275920178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.053212643, y: 0.2508613}
+  m_Size: {x: 0.4353323, y: 1.4182775}
+  m_Direction: 0

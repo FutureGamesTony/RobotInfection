@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+using System.Collections;
 public class ControllerCustomization : MonoBehaviour
 {
 
@@ -11,6 +11,7 @@ public class ControllerCustomization : MonoBehaviour
 	private bool _previousWeapon = false;
 	private bool _nextWeapon = false;
 	private bool _fire = false;
+	private bool _shield = false;
 	private KeyCode _upKey;
 	private KeyCode _downKey;
 	private KeyCode _leftKey;
@@ -159,10 +160,10 @@ public class ControllerCustomization : MonoBehaviour
 		_up = true;
 
 	}
-	//public void Down()
-	//{
-	//	_down = true;
-	//}
+	public void Down()
+	{
+		_down = true;
+	}
 	public void Left()
 	{
 		_left = true;
@@ -182,6 +183,10 @@ public class ControllerCustomization : MonoBehaviour
 	public void Fire()
 	{
 		_fire = true;
+	}
+	public void Shield()
+	{
+		_shield = true;
 	}
 	public KeyCode UpKey()
 	{

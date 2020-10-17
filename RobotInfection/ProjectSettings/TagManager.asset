@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - RNABullet
   - PickUp
+  - Shield
   layers:
   - Default
   - TransparentFX

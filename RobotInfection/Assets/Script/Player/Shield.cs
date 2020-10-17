@@ -10,10 +10,12 @@ public class Shield : MonoBehaviour
 	private float _shieldCoolDown = 3f;
 	private int _shieldHealth;
 	private Player _player;
+	public SpriteRenderer shieldSpriteRenderer;
 
 	private void Awake()
 	{
 		_player = GetComponent<Player>();
+		
 	}
 	public bool ActivateShield()
 	{
@@ -22,6 +24,7 @@ public class Shield : MonoBehaviour
 			Debug.Log("Shield");
 			_shield = true;
 			_player.Shielded(_shield);
+			shieldSpriteRenderer.enabled = true;
 		}
 
 		return _shield;
@@ -41,6 +44,7 @@ public class Shield : MonoBehaviour
 		}
 		if (_isCooling)
 		{
+			shieldSpriteRenderer.enabled = false;
 			_shieldCoolDown -= Time.deltaTime;
 			if (_shieldCoolDown < 0)
 			{
