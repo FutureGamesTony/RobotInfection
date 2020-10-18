@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 public class Options : MonoBehaviour
 {
-	private Button _controls;
+	private GameObject _controls;
 	private void Awake()
 	{
-		_controls = GetComponentInChildren<Button>();
+		_controls = transform.Find("Controls").gameObject;
 		Debug.Log(_controls);
 	}
 	public void OptionsMenuOpen()

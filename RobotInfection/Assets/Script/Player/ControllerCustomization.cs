@@ -24,10 +24,6 @@ public class ControllerCustomization : MonoBehaviour
 	public bool _isActive = false;
 	private void Awake()
 	{
-
-
-
-
 		gameObject.SetActive(_isActive);
 	}
 	private void Update()

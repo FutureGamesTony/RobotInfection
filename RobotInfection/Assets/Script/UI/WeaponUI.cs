@@ -1,31 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class WeaponUI : MonoBehaviour
 {
-	
-	public GameObject iceGun;
-	public GameObject flamethrower;
-	public GameObject cannon;
-
-	public void IceGun()
+	public Image[] _weapons;
+	private void Awake()
 	{
-		iceGun.SetActive(true);
-		flamethrower.SetActive(false);
-		cannon.SetActive(false);
+		_weapons = GetComponentsInChildren<Image>();
+		for (int i = 0; i < _weapons.Length; i++)
+		{
+			_weapons[i].enabled = false;
+		}
 	}
-	public void Flamethrower()
+	public void ChangeSprite(string sprite)
 	{
-		iceGun.SetActive(false);
-		flamethrower.SetActive(true);
-		cannon.SetActive(false);
+		for (int i = 0; i < _weapons.Length; i++)
+		{
+			if (_weapons[i].name == sprite)
+			{
+				_weapons[i].enabled = true;
+			}
+			else
+			{
+				_weapons[i].enabled = false;
+			}
+		}
 	}
-	public void Cannon()
-	{
-		iceGun.SetActive(false);
-		flamethrower.SetActive(false);
-		cannon.SetActive(true);
-	}
-
 }

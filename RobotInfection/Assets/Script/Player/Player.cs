@@ -5,7 +5,6 @@ public class Player : MonoBehaviour
 	private enum PickUpTypes { ICEGUN, FLAMETHROWER, CANNON, HEALTH, SHIELD };
 	public int hp = 10;
 	private bool _isShielded;
-	private GameObject[] _pickUps;
 	private UseWeapon _useWeapon;
 	private void Awake()
 	{
@@ -13,7 +12,7 @@ public class Player : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (hp < 0)
+		if (hp <= 0)
 		{
 			Debug.Log("You are dead ");
 		}

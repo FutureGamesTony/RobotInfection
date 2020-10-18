@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(ObjectMovement))]
 [RequireComponent(typeof(ObjectRotation))]
@@ -8,12 +9,12 @@ public class ControllerInput : MonoBehaviour
 	[Range(1, 100)]
 	public float movementSpeed = 100.0f;
 	public ControllerCustomization controllerCustomization;
-	public Options options;
 
+	private Options _options;
 	private float _movementX;
 	private float _movementY;
 	private bool _isInOptions = false;	
-	private KeyCode _options = KeyCode.Escape;
+	private KeyCode _optionsKey = KeyCode.Escape;
 	private KeyCode _upKey;
 	private KeyCode _downKey;
 	private KeyCode _leftKey;
@@ -37,6 +38,8 @@ public class ControllerInput : MonoBehaviour
 		_objectRotation = GetComponent<ObjectRotation>();
 		_useWeapon = GetComponent<UseWeapon>();
 		_shield = GetComponent<Shield>();
+		_options = FindObjectOfType<Options>();
+
 	}
 	private void Update()
 	{
@@ -80,17 +83,17 @@ public class ControllerInput : MonoBehaviour
 		{
 			_shield.ActivateShield();
 		}
-		if (Input.GetKeyUp(_options))
+		if (Input.GetKeyUp(_optionsKey))
 		{
 			if (!_isInOptions)
 			{
-				options.OptionsMenuOpen();
+				_options.OptionsMenuOpen();
 				_isInOptions = true;
 				return;
 			}
 			if (_isInOptions)
 			{
-				options.OptionsMenuClose();
+				_options.OptionsMenuClose();
 				ButtonMapping();
 				_isInOptions = false;
 				return;

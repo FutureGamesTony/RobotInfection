@@ -5,12 +5,7 @@ public class PickUp : MonoBehaviour
 {
 	public enum PickUpTypes {ICEGUN, FLAMETHROWER, CANNON, HEALTH, SHIELD};
 	public PickUpTypes pickUpType;
-	public GameObject _pickUpObject;
 	public int health;
-	private IceGunPickUp _iceGunPickUp;
-	private FlameThrowerPickup _flameThrowerPickUp;
-	private CannonPickup _cannonPickUp;
-	private HealthPickUp _healthPickUp;
 	private Sprite _sprite;
 	private SpriteRenderer _spriteRenderer;
 	private BoxCollider2D _boxCollider2D;
@@ -41,7 +36,11 @@ public class PickUp : MonoBehaviour
 	{
 		_sprite = Resources.Load<Sprite>(_spritePath + _sprites[(int)pickUpType]);
 	}
-
+	public void SetHealth(int healthAmount)
+	{
+		health = healthAmount;
+		pickUpType = PickUpTypes.HEALTH;
+	}
 	public int PickUpHealth()
 	{
 

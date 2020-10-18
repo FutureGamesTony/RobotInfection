@@ -18,7 +18,12 @@ public class UseWeapon : MonoBehaviour
 	private int _selectIceGun = -1;
 	private bool _canFire = false;
 	private Elements weaponElement;
+	public WeaponUI _weaponUI;
 
+	private void Awake()
+	{
+		_weaponUI = FindObjectOfType<WeaponUI>();
+	}
 	public void Attack(KeyCode fireKey)
 	{
 
@@ -52,6 +57,18 @@ public class UseWeapon : MonoBehaviour
 				_canFire = true;
 				_time = 0;
 			}
+		}
+		switch (_weapon)
+		{
+			case Weapon.ICEGUN:
+			_weaponUI.ChangeSprite("IceGun");
+				break;
+			case Weapon.FLAMETHROWER:
+				_weaponUI.ChangeSprite("FlameThrower");
+				break;
+			case Weapon.CANNON:
+				_weaponUI.ChangeSprite("Cannon");
+				break;
 		}
 	}
 	public int PreviousWeapon()

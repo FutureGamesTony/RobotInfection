@@ -17,6 +17,7 @@ public class TVirus : MonoBehaviour
 	 */
 	private GameObject _player;
 	private GameObject _rnaBullet;
+	private GameObject _heathDrop;
 	private float _sineCurveDistance = 5;
 	private ObjectMovement _objectMovement;
 	private ObjectRotation _objectRotation;
@@ -31,7 +32,7 @@ public class TVirus : MonoBehaviour
 	private float _fireRate = .3f;
 	private float _timer;
 	private Vector3 _playerPosition;
-
+	//This enemy were supposed to have different behaviour based on attack. Fire was a must, to then do damage and ice would double the HP (one time) and cannon kills it.
 	private void Start()
 	{
 		_player = GameObject.FindGameObjectWithTag("Player");
@@ -42,6 +43,7 @@ public class TVirus : MonoBehaviour
 		_objectRotation = GetComponent<ObjectRotation>();
 		_state = State.MOVING;
 		_playerPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, _player.transform.position.z);
+		_heathDrop = Resources.Load<GameObject>("Prefabs/PickUp");
 	}
 	private void Update()
 	{
@@ -113,6 +115,12 @@ public class TVirus : MonoBehaviour
 	{
 		if (collision.tag == "Bullet")
 		{
+			int rand = Random.Range(1, 100);
+			if (rand < 50)
+			{
+				Instantiate(_heathDrop);
+				_heathDrop.GetComponent<PickUp>().SetHealth(20);
+			}
 			Destroy(gameObject);
 		}
 	}
